@@ -1,0 +1,37 @@
+.profile-header {
+    display: grid;
+    grid-template-columns: 2fr repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 10px;
+    margin: 15px;
+}
+
+.profile-picture {
+    width: 80%;
+    align-self: center;
+    justify-self: center;
+    border-radius: 50%;
+}
+
+.profile-name {
+    grid-row: 2 / 3;
+    grid-column: 1 / 2;
+    justify-self: center;
+}
+
+.edit-profile-btn {
+    grid-row: 2 / 3;
+    grid-column: 2 / 4;
+    align-self: baseline;
+}
+
+.settings-profile-btn {
+    grid-row: 2 / 3;
+    grid-column: 4 / 5;
+    align-self: baseline;
+}
+
+.profile-counts {
+    align-self: end;
+    justify-self: center;
+}
