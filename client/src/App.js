@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navigation, ProfileHeader } from './components';
+import { Navigation, ProfileHeader, ProfileImageList } from './components';
 
 class App extends Component {
   render() {
@@ -7,6 +7,7 @@ class App extends Component {
       <div className="App">
         <Navigation />
         <ProfileHeader />
+        <ProfileImageList />
       </div>
     );
   }
