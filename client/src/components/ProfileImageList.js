@@ -105,7 +105,8 @@ class ProfileImageList extends Component {
 }
 
 const mapStateToProps = state => {
-    return { thumbnailView: state.profileReducer.thumbnailView }
+    console.log(state);
+    return { thumbnailView: state.profile.thumbnailView }
 }
 
 export default connect(mapStateToProps)(ProfileImageList);
