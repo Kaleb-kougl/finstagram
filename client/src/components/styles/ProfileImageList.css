@@ -3,16 +3,13 @@
     width: 100%;
     flex-wrap: wrap;
     border-top: 3px solid rgb(244, 244, 244);
+    justify-content: space-evenly;
 }
 
 .thumbnail {
     min-height: 30vw;
-    width: 33vw;
+    width: 32vw;
     margin-bottom: 0.5vw;
-}
-
-.space0, .space1 {
-    margin-right: 0.5vw;
 }
 
 .imagefeed-image {

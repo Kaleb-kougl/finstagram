@@ -1,0 +1,2 @@
+export const THUMBNAIL_VIEW = `THUMBNAIL_VIEW`;
+export const PORTRAIT_VIEW = `PORTRAIT_VIEW`;
