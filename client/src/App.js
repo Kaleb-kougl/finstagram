@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import { Router } from "@reach/router";
-import {
-  Navigation,
-  ProfileHeader,
-  ProfileImageList,
-  ProfileViewSelector
-} from './components';
+import { Navigation } from './components';
 import { Profile, NotFound } from './pages';
 
 
