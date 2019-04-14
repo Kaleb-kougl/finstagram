@@ -3,10 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
-const socketio = require('socket.io');
 const app = express();
-const server = http.createServer(app)
-const io = socketio(server)
 const {
     PORT,
     FB_CLIENT_ID,
@@ -53,17 +50,7 @@ passport.use(new FacebookStrategy({
     }
 ));
 
-// middleware that triggers the PassportJS authentication process
-const facebookAuth = passport.authenticate('facebook');
-
-// middleware that grabs the socketid from the request and sticks it into the session
-// giving access to the socketid when we need to emit an event
-const addSocketIdToSession = (req, res, next) => {
-    req.session.socketId = req.query.socketId;
-    next();
-}
-
-
+// root 
 app.get('/',
     (req, res) => {
         console.log('/ was hit \n');
@@ -71,14 +58,25 @@ app.get('/',
     }
 );
 
-// middleware for socketid, then facebookAuth
-app.get('/auth/facebook', addSocketIdToSession, facebookAuth);
+// initial route for facebook login
+app.get('/auth/facebook',
+    passport.authenticate('facebook'),
+    (req, res) => {
+        console.log('/auth/facebook was hit \n');
+        console.log('/auth/facebook... \n')
+    }
+);
 
-app.get('/auth/facebook/callback', facebookAuth, (req, res) => {
-    io.in(req.session.socketId).emit('user', req.user);
-    res.send();
-});
+// callback for facebook login
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    (req, res) => {
+        console.log('/auth/facebook/cb was hit \n');
+        return res.redirect('/')
+    }
+);
 
+// Catch-all if the route isn't in server
 app.get('*', (req, res) => {
     console.log('in server side code but did not find path')
     res.send('in server but did not find path');
