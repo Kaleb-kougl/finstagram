@@ -11,7 +11,7 @@ const {
 } = process.env;
 
 app.use(express.json())
-app.use(cors());
+app.use(cors({ origin: "http://localhost:3000/" }));
 
 /* This will be necessary to verify that user is authenticated at particular routes like in settings... 
 function ensureAuthenticated(req, res, next) {
@@ -42,13 +42,16 @@ passport.use(new FacebookStrategy({
     callbackURL: `http://localhost:${PORT}/auth/facebook/callback`
 },
     (accessToken, refreshToken, profile, cb) => {
-        console.log(profile);
-        // DB needs to be set up to store user data. 
-        // User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-        return cb(err, user);
-        // });
+        process.nextTick(() => cb(null, profile))
     }
 ));
+// http://localhost:5000/auth/facebook/callback
+
+app.use(function (req, res, next) {
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    next();
+});
 
 // root 
 app.get('/',
@@ -60,10 +63,15 @@ app.get('/',
 
 // initial route for facebook login
 app.get('/auth/facebook',
+    (req, res) => {
+        res.setHeader('origin', 'http://localhost:5000/auth/facebook')
+        console.log('setting header');
+    },
     passport.authenticate('facebook'),
     (req, res) => {
-        console.log('/auth/facebook was hit \n');
-        console.log('/auth/facebook... \n')
+        console.log('denied here? ')
+        console.log(req.headers);
+        console.log(err, 'not called');
     }
 );
 
@@ -71,14 +79,17 @@ app.get('/auth/facebook',
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/login' }),
     (req, res) => {
+        console.log('callback')
+        console.log(req.user);
         console.log('/auth/facebook/cb was hit \n');
-        return res.redirect('/')
+        res.json(req.user);
     }
 );
 
 // Catch-all if the route isn't in server
 app.get('*', (req, res) => {
     console.log('in server side code but did not find path')
+    // console.log(req.user);
     res.send('in server but did not find path');
 });
 
