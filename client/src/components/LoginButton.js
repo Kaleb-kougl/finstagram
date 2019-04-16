@@ -1,18 +1,13 @@
-import React, { Component } from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
+import { attemptFbLogin } from '../redux/actions';
 
-class LoginButton extends Component {
-    constructor() {
-        super();
-        this.popup = null;
-    }
+const LoginButton = ({ attemptFbLogin }) => (
+    <button onClick={attemptFbLogin}>Login with Facebook!</button>
+);
 
-    render() {
-        return (
-            <div>
-
-            </div>
-        )
-    }
+const mapDispatchToProps = {
+    attemptFbLogin: attemptFbLogin,
 }
 
-export default LoginButton;
+export default connect(null, mapDispatchToProps)(LoginButton);

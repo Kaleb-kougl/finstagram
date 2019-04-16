@@ -10,12 +10,12 @@ export const change_to_portrait = () => ({
     payload: {},
 });
 
-export const login_user = (user) => ({
-    type: TYPES.LOGIN,
+export const attemptFbLogin = (user) => ({
+    type: TYPES.ATTEMPT_FB_LOGIN,
     payload: { user: user },
 });
 
 export const logout_user = () => ({
-    type: TYPES.LOGIN,
+    type: TYPES.LOGOUT,
     payload: { user: null },
 });

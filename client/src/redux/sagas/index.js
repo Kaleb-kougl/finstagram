@@ -1,17 +1,25 @@
-import { takeEvery } from 'redux-saga/effects';
+import { put, takeLatest, all } from 'redux-saga/effects';
 import * as types from '../constants/actionTypes';
 import store from '../store';
 
-const handleLogin = function* handleLogin(params) {
-    console.log('PARAMS', params);
-    // grab every dispatched login
-    // yield takeEvery(types.LOGIN, (action) => {
-    //     params.socket.emit('login', action);
-    // })
-    // yield takeEvery('user', (user) => {
-    //     // dispatch to store...
-    //     store.dispatch
-    // })
+function* attemptFBLogin() {
+    console.log('attempting fb login in saga');
+
+    const json = yield fetch('http://localhost:5000/auth/facebook', {
+        credentials: "include"
+    })
+        .then(res => res.json());
+
+    // This is a full description of the action that will be dispatched
+    yield put({ type: types.SUCCESSFUL_FB_LOGIN, payload: json });
 }
 
-export default handleLogin;
+function* actionWatcher() {
+    yield takeLatest(types.ATTEMPT_FB_LOGIN, attemptFBLogin);
+}
+
+export default function* rootSaga() {
+    yield all([
+        actionWatcher(),
+    ]);
+};

@@ -1,4 +1,5 @@
 export const THUMBNAIL_VIEW = `THUMBNAIL_VIEW`;
 export const PORTRAIT_VIEW = `PORTRAIT_VIEW`;
-export const LOGIN = `LOGIN`;
+export const ATTEMPT_FB_LOGIN = `ATTEMPT_FB_LOGIN`;
+export const SUCCESSFUL_FB_LOGIN = `SUCCESSFUL_FB_LOGIN`;
 export const LOGOUT = `LOGOUT`;
