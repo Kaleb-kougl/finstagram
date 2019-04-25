@@ -48,5 +48,13 @@ functions:
           method: get
           cors: true
           authorizer: aws_iam
+  user-specific-list:
+    handler: user-specific-list.main
+    events:
+      - http:
+        path: userPhotos
+        cors: true
+        authroizer: aws_iam
+
 
 
