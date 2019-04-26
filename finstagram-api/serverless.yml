@@ -52,9 +52,10 @@ functions:
     handler: user-specific-list.main
     events:
       - http:
-        path: userPhotos
-        cors: true
-        authroizer: aws_iam
+          path: userPhotos
+          method: get
+          cors: true
+          authroizer: aws_iam
   update-photo:
     handler: update-photo.main
     events:
@@ -63,6 +64,14 @@ functions:
           method: put
           cors: true
           authorizer: aws_iam
+  delete-photo:
+      handler: delete-photo.main
+      events:
+        - http:
+            path: photos/{id}
+            method: delete
+            cors: true
+            authorizer: aws_iam
 
 
 
