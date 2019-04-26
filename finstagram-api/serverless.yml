@@ -55,6 +55,15 @@ functions:
         path: userPhotos
         cors: true
         authroizer: aws_iam
+  update-photo:
+    handler: update-photo.main
+    events:
+      - http:
+          path: photos/{id}
+          method: put
+          cors: true
+          authorizer: aws_iam
+
 
 
 

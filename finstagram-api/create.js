@@ -11,7 +11,7 @@ export async function main(event, context) {
         Item: {
             userId: event.requestContext.identity.cognitoIdentityId,
             photoId: uuid.v1(),
-            text: data.text,
+            description: data.description,
             photo: data.photo,
             createdAt: Date.now()
         }
