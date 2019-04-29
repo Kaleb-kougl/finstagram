@@ -2,7 +2,7 @@ import { put, takeLatest, all } from 'redux-saga/effects';
 import * as types from '../constants/actionTypes';
 import store from '../store';
 
-function* attemptFBLogin() {
+function* attemptAWSLogin() {
     console.log('attempting fb login in saga');
 
     const json = yield fetch('http://localhost:5000/auth/facebook', {
@@ -15,7 +15,7 @@ function* attemptFBLogin() {
 }
 
 function* actionWatcher() {
-    yield takeLatest(types.ATTEMPT_FB_LOGIN, attemptFBLogin);
+    yield takeLatest(types.ATTEMPT_FB_LOGIN, attemptAWSLogin);
 }
 
 export default function* rootSaga() {

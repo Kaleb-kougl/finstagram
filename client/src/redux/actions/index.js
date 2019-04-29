@@ -10,8 +10,8 @@ export const change_to_portrait = () => ({
     payload: {},
 });
 
-export const attemptFbLogin = (user) => ({
-    type: TYPES.ATTEMPT_FB_LOGIN,
+export const attemptAWSLogin = (user) => ({
+    type: TYPES.ATTEMPT_AWS_LOGIN,
     payload: { user: user },
 });
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Router } from "@reach/router";
 import { Navigation } from './components';
-import { Profile, NotFound } from './pages';
+import { Profile, NotFound, Login } from './containers';
 
 
 class App extends Component {
@@ -12,7 +12,8 @@ class App extends Component {
 
         <Router>
           <Profile path="/" />
-          <NotFound path="/test" />
+          <Login path="/login" />
+          <NotFound default />
         </Router>
       </div>
     );
