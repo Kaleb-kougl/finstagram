@@ -1,16 +1,19 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { connect } from 'react-redux'
 import { Auth } from "aws-amplify";
+import { attemptAWSLogin } from '../redux/actions';
 import "./Login.css";
 
-export default class Login extends Component {
+class Login extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            isError: false,
         };
     }
 
@@ -27,12 +30,12 @@ export default class Login extends Component {
     handleSubmit = async event => {
         event.preventDefault();
 
-        try {
-            await Auth.signIn(this.state.email, this.state.password);
-            alert("Logged in");
-        } catch (e) {
-            alert(e.message);
-            console.log(e);
+        this.props.attemptAWSLogin(this.state.email, this.state.password);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.error) {
+            alert(this.props.error.message);
         }
     }
 
@@ -70,3 +73,11 @@ export default class Login extends Component {
         );
     }
 }
+
+const mapStateToProps = ({ user }) => ({
+    error: user.error
+});
+
+const mapDispatchToProps = { attemptAWSLogin };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

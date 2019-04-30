@@ -1,13 +1,18 @@
 import {
     ATTEMPT_AWS_LOGIN,
     LOGOUT,
-    SUCCESSFUL_AWS_LOGIN
+    SUCCESSFUL_AWS_LOGIN,
+    FAILED_AWS_LOGIN,
 } from '../constants/actionTypes';
 
 const initialState = {
-    user: null,
-    disabledPopup: false,
-    loading: false,
+    // user: null, //This is going to be stored in the browser session via amplify
+    // disabledPopup: false,
+    isLoading: false,
+    isAuthenticated: false,
+    email: null,
+    password: null,
+    error: null,
 };
 
 export default function (state = initialState, action) {
@@ -16,20 +21,30 @@ export default function (state = initialState, action) {
             console.log(action);
             return {
                 ...state,
-                user: action.payload,
-                loading: true,
+                email: action.payload.email,
+                password: action.payload.password,
+                isLoading: true,
+                error: null,
             }
         case SUCCESSFUL_AWS_LOGIN:
-            // b/c no clue how this user info is going to get returned
-            console.log(action);
             return {
                 ...state,
-                user: action.payload
+                isAuthenticated: true,
+                email: null,
+                password: null,
+                isLoading: false,
             }
         case LOGOUT:
             return {
                 ...state,
-                user: null,
+                isAuthenticated: false,
+                error: null,
+            }
+        case FAILED_AWS_LOGIN:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload.error,
             }
         default:
             return state;

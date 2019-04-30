@@ -10,12 +10,22 @@ export const change_to_portrait = () => ({
     payload: {},
 });
 
-export const attemptAWSLogin = (user) => ({
+export const attemptAWSLogin = (email, password) => ({
     type: TYPES.ATTEMPT_AWS_LOGIN,
-    payload: { user: user },
+    payload: { email, password },
+});
+
+export const successfulAWSLogin = () => ({
+    type: TYPES.SUCCESSFUL_AWS_LOGIN,
+    payload: {},
 });
 
 export const logout_user = () => ({
     type: TYPES.LOGOUT,
     payload: { user: null },
+});
+
+export const failedAWSLogin = (error) => ({
+    type: TYPES.FAILED_AWS_LOGIN,
+    payload: { error: error.message },
 });

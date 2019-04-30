@@ -1,21 +1,36 @@
-import { put, takeLatest, all } from 'redux-saga/effects';
+import { put, takeLatest, all, select, call } from 'redux-saga/effects';
+import { Auth } from "aws-amplify";
 import * as types from '../constants/actionTypes';
-import store from '../store';
+// import store from '../store';
+
+const getEmail = ({ user }) => user.email;
+const getPassword = ({ user }) => user.password;
+
+function attemptLogin(email, password) {
+    console.log(email, password);
+    return Auth.signIn(email, password)
+        .then(response => ({ response }))
+        .catch(error => ({ error }));
+}
 
 function* attemptAWSLogin() {
-    console.log('attempting fb login in saga');
+    console.log('attempting aws login in saga');
+    // Auth.signIn()
+    const email = yield select(getEmail);
+    const password = yield select(getPassword);
 
-    const json = yield fetch('http://localhost:5000/auth/facebook', {
-        credentials: "include"
-    })
-        .then(res => res.json());
+    // questionable below this line
 
-    // This is a full description of the action that will be dispatched
-    yield put({ type: types.SUCCESSFUL_FB_LOGIN, payload: json });
+    const { response, error } = yield call(attemptLogin, email, password);
+    if (response) {
+        yield put({ type: types.SUCCESSFUL_AWS_LOGIN, payload: {} });
+    } else {
+        yield put({ type: types.FAILED_AWS_LOGIN, payload: { error } });
+    }
 }
 
 function* actionWatcher() {
-    yield takeLatest(types.ATTEMPT_FB_LOGIN, attemptAWSLogin);
+    yield takeLatest(types.ATTEMPT_AWS_LOGIN, attemptAWSLogin);
 }
 
 export default function* rootSaga() {
