@@ -8,10 +8,7 @@ function attemptLogout() {
             console.log(response);
             return { signedOut: true }
         })
-        .catch(error => {
-            console.log(error);
-            return { error }
-        });
+        .catch(error => ({ error }));
 }
 
 function* attemptAWSLogout() {

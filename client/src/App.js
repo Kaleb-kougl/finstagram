@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
 import { Router } from "@reach/router";
+import { Auth } from 'aws-amplify';
+import { connect } from 'react-redux';
+import { successfulAWSLogin } from './redux/actions';
 import { Navigation } from './components';
 import { Profile, NotFound, Login } from './containers';
 
 
 class App extends Component {
+
+  async componentDidMount() {
+    try {
+      await Auth.currentSession();
+      this.props.successfulAWSLogin();
+    } catch (error) {
+      // no current user in session
+      console.log(error);
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -20,4 +34,6 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = { successfulAWSLogin };
+
+export default connect(null, mapDispatchToProps)(App);
