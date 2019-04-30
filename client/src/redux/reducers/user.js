@@ -3,6 +3,8 @@ import {
     LOGOUT,
     SUCCESSFUL_AWS_LOGIN,
     FAILED_AWS_LOGIN,
+    FAILED_LOGOUT,
+    SUCCESSFUL_LOGOUT,
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -34,17 +36,28 @@ export default function (state = initialState, action) {
                 password: null,
                 isLoading: false,
             }
+        case FAILED_AWS_LOGIN:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload.error,
+            }
         case LOGOUT:
             return {
                 ...state,
                 isAuthenticated: false,
                 error: null,
             }
-        case FAILED_AWS_LOGIN:
+        case FAILED_LOGOUT:
             return {
                 ...state,
-                isLoading: false,
                 error: action.payload.error,
+            }
+        case SUCCESSFUL_LOGOUT:
+            return {
+                ...state,
+                isAuthenticated: false,
+                error: null,
             }
         default:
             return state;

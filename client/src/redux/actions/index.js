@@ -22,7 +22,7 @@ export const successfulAWSLogin = () => ({
 
 export const logout_user = () => ({
     type: TYPES.LOGOUT,
-    payload: { user: null },
+    payload: { isAuthenticated: false, },
 });
 
 export const failedAWSLogin = (error) => ({

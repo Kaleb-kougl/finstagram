@@ -2,15 +2,10 @@ import React, { Component } from 'react'
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { connect } from 'react-redux';
+import { logout_user } from '../redux/actions';
 import './styles/Navigation.css';
 
 class Navigation extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            user: null,
-        }
-    }
     render() {
         return (
             <Navbar bg="light" expand="lg" >
@@ -19,7 +14,7 @@ class Navigation extends Component {
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                     {
                         this.props.isAuthenticated ?
-                            <Nav.Item onClick={this.handleLogout} className="logout-btn">
+                            <Nav.Item onClick={this.props.handleLogout} className="logout-btn">
                                 Logout
                             </Nav.Item>
                             :
@@ -38,4 +33,6 @@ const mapStateToProps = ({ user }) => ({
     isAuthenticated: user.isAuthenticated,
 });
 
-export default connect(mapStateToProps, null)(Navigation);
+const mapDispatchToProps = { handleLogout: logout_user };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

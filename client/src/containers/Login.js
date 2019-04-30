@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { connect } from 'react-redux';
-import { Auth } from "aws-amplify";
 import { attemptAWSLogin } from '../redux/actions';
 import "./Login.css";
 
@@ -15,6 +14,7 @@ class Login extends Component {
             password: "",
             isError: false,
         };
+
     }
 
     validateForm() {
@@ -37,14 +37,13 @@ class Login extends Component {
         if (!prevProps.error && this.props.error) {
             this.setState({ isError: true });
             alert(this.props.error.message);
-        } else if (this.props.isAuthenticated) {
+        } else if (!prevProps.isAuthenticated && this.props.isAuthenticated) {
             alert('Successfully logged in');
         }
     }
 
 
     render() {
-        console.log(Auth);
         return (
             <div className="Login">
                 <Form onSubmit={this.handleSubmit}>
