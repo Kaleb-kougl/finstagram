@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { Auth } from "aws-amplify";
 import { attemptAWSLogin } from '../redux/actions';
 import "./Login.css";
@@ -34,8 +34,11 @@ class Login extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.props.error) {
+        if (!prevProps.error && this.props.error) {
+            this.setState({ isError: true });
             alert(this.props.error.message);
+        } else if (this.props.isAuthenticated) {
+            alert('Successfully logged in');
         }
     }
 
@@ -58,6 +61,7 @@ class Login extends Component {
                             value={this.state.password}
                             onChange={this.handleChange}
                             type="password"
+                            className="signup-btn"
                         />
                     </Form.Group>
                     <Button
@@ -65,6 +69,7 @@ class Login extends Component {
                         disabled={!this.validateForm()}
                         type="submit"
                         variant="light"
+                        className="login-btn"
                     >
                         Login
                     </Button>
@@ -75,7 +80,8 @@ class Login extends Component {
 }
 
 const mapStateToProps = ({ user }) => ({
-    error: user.error
+    error: user.error,
+    isAuthenticated: user.isAuthenticated,
 });
 
 const mapDispatchToProps = { attemptAWSLogin };
