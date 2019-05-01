@@ -1,9 +1,16 @@
 import React, { Component } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
-import "./Signup.css";
+import { connect } from 'react-redux';
+import { navigate } from "@reach/router";
+import {
+    attemptAWSSignup,
+    attemptAWSConfirmSignup,
+    attemptAWSLogin
+} from '../redux/actions';
+import "./styles/Signup.css";
 
-export default class Signup extends Component {
+class Signup extends Component {
     constructor(props) {
         super(props);
 
@@ -13,7 +20,8 @@ export default class Signup extends Component {
             password: "",
             confirmPassword: "",
             confirmationCode: "",
-            newUser: null
+            newUser: null,
+            isError: false,
         };
     }
 
@@ -40,7 +48,7 @@ export default class Signup extends Component {
 
         this.setState({ isLoading: true });
 
-        this.setState({ newUser: "test" });
+        this.props.attemptAWSSignup(this.state.email, this.state.password);
 
         this.setState({ isLoading: false });
     }
@@ -49,6 +57,26 @@ export default class Signup extends Component {
         event.preventDefault();
 
         this.setState({ isLoading: true });
+
+        this.props.attemptAWSConfirmSignup(this.state.email, this.state.confirmationCode);
+        this.props.attemptAWSLogin(this.state.email, this.state.password);
+        navigate('/');
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        console.log('component updated', this.props);
+        if (!this.state.isError && this.props.error && this.props.error.code === "UsernameExistsException") {
+            alert(this.props.error.message);
+            alert('caught ya');
+            this.setState({ newUser: true, isError: true });
+        }
+        else if (!prevProps.error && this.props.error) {
+            this.setState({ isError: true });
+            alert(this.props.error.message);
+        } else if (!prevProps.newUser && this.props.newUser && prevProps.newUser !== this.props.newUser) {
+            alert('Check your email for confirmation code!');
+            this.setState({ newUser: this.props.newUser });
+        }
     }
 
     renderConfirmationForm() {
@@ -131,3 +159,13 @@ export default class Signup extends Component {
         );
     }
 }
+
+const mapStateToProps = ({ signup }) => ({
+    error: signup.error,
+    isLoading: signup.isLoading,
+    newUser: signup.newUser,
+});
+
+const mapDispatchToProps = { attemptAWSSignup, attemptAWSConfirmSignup, attemptAWSLogin };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

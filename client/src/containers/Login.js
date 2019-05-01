@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import { navigate } from "@reach/router";
 import { connect } from 'react-redux';
 import { attemptAWSLogin } from '../redux/actions';
-import "./Login.css";
+import "./styles/Login.css";
 
 class Login extends Component {
     constructor(props) {
