@@ -50,14 +50,17 @@ class Login extends Component {
             <div className="Login">
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group controlId="email">
+                        <Form.Label>Email</Form.Label>
                         <Form.Control
                             autoFocus
                             type="email"
                             value={this.state.email}
                             onChange={this.handleChange}
+                            placeholder="Enter email"
                         />
                     </Form.Group>
                     <Form.Group controlId="password">
+                        <Form.Label>Password</Form.Label>
                         <Form.Control
                             value={this.state.password}
                             onChange={this.handleChange}
@@ -71,6 +74,7 @@ class Login extends Component {
                         type="submit"
                         variant="light"
                         className="login-btn"
+                        placeholder="Password"
                     >
                         Login
                     </Button>

@@ -4,7 +4,12 @@ import { Auth } from 'aws-amplify';
 import { connect } from 'react-redux';
 import { successfulAWSLogin } from './redux/actions';
 import { Navigation } from './components';
-import { Profile, NotFound, Login } from './containers';
+import {
+  Profile,
+  NotFound,
+  Login,
+  Signup
+} from './containers';
 
 
 class App extends Component {
@@ -28,6 +33,7 @@ class App extends Component {
         <Router>
           <Profile path="/" />
           <Login path="/login" />
+          <Signup path="/signup" />
           <NotFound default />
         </Router>
       </div>
