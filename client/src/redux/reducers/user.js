@@ -20,7 +20,6 @@ const initialState = {
 export default function (state = initialState, action) {
     switch (action.type) {
         case ATTEMPT_AWS_LOGIN:
-            console.log(action);
             return {
                 ...state,
                 email: action.payload.email,

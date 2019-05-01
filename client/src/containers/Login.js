@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { navigate } from "@reach/router";
 import { connect } from 'react-redux';
 import { attemptAWSLogin } from '../redux/actions';
 import "./Login.css";
@@ -38,7 +39,8 @@ class Login extends Component {
             this.setState({ isError: true });
             alert(this.props.error.message);
         } else if (!prevProps.isAuthenticated && this.props.isAuthenticated) {
-            alert('Successfully logged in');
+            alert('successfull logged in!');
+            navigate('/');
         }
     }
 
