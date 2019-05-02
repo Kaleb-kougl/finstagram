@@ -8,7 +8,8 @@ import {
   Profile,
   NotFound,
   Login,
-  Signup
+  Signup,
+  NewPhoto,
 } from './containers';
 
 
@@ -18,7 +19,6 @@ class App extends Component {
     try {
       await Auth.currentSession();
       this.props.successfulAWSLogin();
-      navigate(`/`);
     } catch (error) {
       // no current user in session
       console.log(error);
@@ -34,6 +34,7 @@ class App extends Component {
           <Profile path="/" />
           <Login path="/login" />
           <Signup path="/signup" />
+          <NewPhoto path="/newphoto" />
           <NotFound default />
         </Router>
       </div>
