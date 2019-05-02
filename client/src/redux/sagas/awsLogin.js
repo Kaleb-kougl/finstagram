@@ -1,5 +1,5 @@
 import { put, takeLatest, select, call } from 'redux-saga/effects';
-import { Auth } from "aws-amplify";
+import { Auth } from 'aws-amplify';
 import * as types from '../constants/actionTypes';
 // import store from '../store';
 
@@ -17,8 +17,6 @@ function* attemptAWSLogin() {
     // Auth.signIn()
     const email = yield select(getEmail);
     const password = yield select(getPassword);
-
-    // questionable below this line
 
     const { response, error } = yield call(attemptLogin, email, password);
     if (response) {

@@ -1,4 +1,4 @@
-import { all, } from 'redux-saga/effects';
+import { all } from 'redux-saga/effects';
 import attemptAWSLoginWatcher from './awsLogin';
 import logoutWatcher from './awsLogout';
 import attemptAWSSignupWatcher from './awsSignup';

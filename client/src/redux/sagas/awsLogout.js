@@ -1,5 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { Auth } from "aws-amplify";
+import { Auth } from 'aws-amplify';
 import * as types from '../constants/actionTypes';
 
 function attemptLogout() {
