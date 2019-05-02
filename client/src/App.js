@@ -1,10 +1,30 @@
 import React, { Component } from 'react';
-import { Router } from "@reach/router";
+import { Router, navigate } from "@reach/router";
+import { Auth } from 'aws-amplify';
+import { connect } from 'react-redux';
+import { successfulAWSLogin } from './redux/actions';
 import { Navigation } from './components';
-import { Profile, NotFound } from './pages';
+import {
+  Profile,
+  NotFound,
+  Login,
+  Signup,
+  NewPhoto,
+} from './containers';
 
 
 class App extends Component {
+
+  async componentDidMount() {
+    try {
+      await Auth.currentSession();
+      this.props.successfulAWSLogin();
+    } catch (error) {
+      // no current user in session
+      console.log(error);
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -12,11 +32,16 @@ class App extends Component {
 
         <Router>
           <Profile path="/" />
-          <NotFound path="/test" />
+          <Login path="/login" />
+          <Signup path="/signup" />
+          <NewPhoto path="/newphoto" />
+          <NotFound default />
         </Router>
       </div>
     );
   }
 }
 
-export default App;
+const mapDispatchToProps = { successfulAWSLogin };
+
+export default connect(null, mapDispatchToProps)(App);

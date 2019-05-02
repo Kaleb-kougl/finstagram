@@ -1,0 +1,21 @@
+#brand {
+  font-family: 'Dancing Script', cursive;
+  font-weight: 600;
+}
+#brand:active {
+  color: #464646;
+}
+#brand:hover {
+  color: #464646;
+}
+
+/* preventing zooming on forms for mobile devices */
+select.form-control,
+textarea.form-control,
+input.form-control {
+  font-size: 16px;
+}
+/* prvents overflow for mobile devices */
+input[type=file] {
+  width: 100%;
+}

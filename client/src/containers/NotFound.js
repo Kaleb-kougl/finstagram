@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LoginButton from '../components/LoginButton';
+import './styles/NotFound.css';
 
 export default class NotFound extends Component {
 
@@ -19,15 +19,9 @@ export default class NotFound extends Component {
 
     render() {
         return (
-            <>
-                <p>
-                    Sorry, nothing here. Please login.
+            <p className="NotFound">
+                Sorry, nothing here. Please login.
             </p>
-                <LoginButton />
-                <button
-                    onClick={this.openPopup}
-                >facebook</button>
-            </>
-        )
+        );
     }
 }

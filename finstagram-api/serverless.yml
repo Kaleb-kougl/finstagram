@@ -1,0 +1,84 @@
+# NOTE: update this with your service name
+service: finstagram-api
+
+# Use the serverless-webpack plugin to transpile ES6
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+# serverless-webpack configuration
+# Enable auto-packing of external modules
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: prod
+  region: us-east-2
+  environment: ${file(env.yml):${self:provider.stage}}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:us-east-2:454067702093:table/photos"
+
+functions:
+  create:
+    handler: create.main
+    events:
+      - http:
+          path: photos
+          method: post
+          cors: true
+          authorizer: aws_iam
+  get:
+    handler: get.main
+    events:
+      - http:
+          path: photos/{id}
+          method: get
+          cors: true
+          authorizer: aws_iam
+  user-specific-list:
+    handler: user-specific-list.main
+    events:
+      - http:
+          path: userPhotos
+          method: get
+          cors: true
+          authroizer: aws_iam
+  update-photo:
+    handler: update-photo.main
+    events:
+      - http:
+          path: photos/{id}
+          method: put
+          cors: true
+          authorizer: aws_iam
+  delete-photo:
+      handler: delete-photo.main
+      events:
+        - http:
+            path: photos/{id}
+            method: delete
+            cors: true
+            authorizer: aws_iam
+
+# Create our resources with separate CloudFormation templates
+resources:
+  # API Gateway Errors
+  - ${file(resources/api-gateway-errors.yml)}
+
+
+
+
+
