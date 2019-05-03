@@ -14,13 +14,13 @@ function attemptLogout() {
 function* attemptAWSLogout() {
     const { signedOut, error } = yield call(attemptLogout);
     if (signedOut) {
-        yield put({ type: types.SUCCESSFUL_LOGOUT, payload: {} });
+        yield put({ type: types.SUCCESSFUL_AWS_LOGOUT, payload: {} });
     } else {
         console.log(error);
-        yield put({ type: types.FAILED_LOGOUT, payload: { error } });
+        yield put({ type: types.FAILED_AWS_LOGOUT, payload: { error } });
     }
 }
 
 export default function* logoutWatcher() {
-    yield takeLatest(types.LOGOUT, attemptAWSLogout);
+    yield takeLatest(types.ATTEMPT_AWS_LOGOUT, attemptAWSLogout);
 }

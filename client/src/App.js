@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, navigate } from "@reach/router";
+import { Router } from "@reach/router";
 import { Auth } from 'aws-amplify';
 import { connect } from 'react-redux';
 import { successfulAWSLogin } from './redux/actions';
