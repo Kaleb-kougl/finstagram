@@ -3,14 +3,20 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { navigate } from '@reach/router';
 import { connect } from 'react-redux';
-import { logout_user } from '../redux/actions';
+import { attemptAWSLogout } from '../redux/actions';
 import './styles/Navigation.css';
 
 class Navigation extends Component {
 
     handleLogout = () => {
-        this.props.logout_user();
+        this.props.attemptAWSLogout();
         navigate('/login');
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (!prevProps.error && this.props.error && this.props.isAuthenticated) {
+            alert(this.props.error.message);
+        }
     }
 
     render() {
@@ -38,8 +44,9 @@ class Navigation extends Component {
 
 const mapStateToProps = ({ user }) => ({
     isAuthenticated: user.isAuthenticated,
+    error: user.error,
 });
 
-const mapDispatchToProps = { logout_user };
+const mapDispatchToProps = { attemptAWSLogout };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
