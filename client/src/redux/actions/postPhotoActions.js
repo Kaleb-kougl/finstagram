@@ -5,9 +5,9 @@ export const attemptAWSPostPhoto = ({ photo, description }) => ({
     payload: { photo, description }
 });
 
-export const successfulAWSPostPhoto = () => ({
+export const successfulAWSPostPhoto = ({ isSuccess }) => ({
     type: TYPES.SUCCESSFUL_AWS_POST_PHOTO,
-    payload: {}
+    payload: { isSuccess }
 });
 
 export const failedAWSPostPhoto = ({ error }) => ({

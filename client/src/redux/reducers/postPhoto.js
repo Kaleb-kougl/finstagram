@@ -9,6 +9,7 @@ const initialState = {
     photo: null,
     description: '',
     error: null,
+    isSuccess: false,
 }
 
 export default function (state = initialState, action) {
@@ -24,6 +25,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 isLoading: false,
+                isSuccess: action.payload.isSuccess,
             };
         case FAILED_AWS_POST_PHOTO:
             return {

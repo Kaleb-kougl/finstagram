@@ -48,7 +48,7 @@ function* attemptAWSPostPhoto() {
     console.log(response, error);
 
     if (response) {
-        yield put({ type: types.SUCCESSFUL_AWS_POST_PHOTO, payload: {} })
+        yield put({ type: types.SUCCESSFUL_AWS_POST_PHOTO, payload: { isSuccess: true } })
     } else {
         yield put({ type: types.FAILED_AWS_POST_PHOTO, payload: { error } })
     }

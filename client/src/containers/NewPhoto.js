@@ -3,10 +3,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
 import { attemptAWSPostPhoto } from '../redux/actions';
+import { navigate } from "@reach/router";
 import config from "../config";
 import "./styles/NewPhoto.css";
-
-// TODO - create a redirect once the photo has uploaded successfully. 
 
 class NewPhoto extends Component {
     constructor(props) {
@@ -26,11 +25,11 @@ class NewPhoto extends Component {
      * Returns a boolean if photo and description is valid
      */
     validateForm() {
-        return this.state.photo != null && this.state.description.length < 121;
+        return this.state.photo != null && this.validateDescriptionLength(this.state.description);
     }
 
     validateDescriptionLength(description) {
-        return description.length < 121;
+        return description.length < 121 && description.length > 0;
     }
 
     /**
@@ -82,8 +81,12 @@ class NewPhoto extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+        console.log(this.props);
         if (!prevProps.error && this.props.error) {
             alert(this.props.error.message);
+        } else if (!prevProps.isSuccess && this.props.isSuccess) {
+            alert('Your picture has been posted!');
+            navigate('/');
         }
     }
 
@@ -139,7 +142,8 @@ class NewPhoto extends Component {
 }
 
 const mapStateToProps = ({ postPhoto }) => ({
-    error: postPhoto.error
+    error: postPhoto.error,
+    isSuccess: postPhoto.isSuccess,
 });
 
 const mapDispatchToProps = { attemptAWSPostPhoto };
