@@ -1,10 +1,10 @@
 import {
-    ATTEMPT_AWS_SIGNUP,
-    SUCCESSFUL_AWS_SIGNUP,
-    FAILED_AWS_SIGNUP,
-    ATTEMPT_AWS_CONFIRM_SIGNUP,
-    SUCCESSFUL_AWS_CONFIRM_SIGNUP,
-    FAILED_AWS_CONFIRM_SIGNUP,
+    AWS_SIGNUP_ATTEMPT,
+    AWS_SIGNUP_SUCCESSFUL,
+    AWS_SIGNUP_FAILED,
+    AWS_CONFIRM_SIGNUP_ATTEMPT,
+    AWS_CONFIRM_SIGNUP_SUCCESSFUL,
+    AWS_CONFIRM_SIGNUP_FAILED,
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -18,7 +18,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case ATTEMPT_AWS_SIGNUP:
+        case AWS_SIGNUP_ATTEMPT:
             return {
                 ...state,
                 email: action.payload.email,
@@ -26,29 +26,29 @@ export default function (state = initialState, action) {
                 isLoading: true,
                 error: null,
             }
-        case SUCCESSFUL_AWS_SIGNUP:
+        case AWS_SIGNUP_SUCCESSFUL:
             return {
                 ...state,
                 newUser: action.payload.newUser,
                 isLoading: false,
             }
-        case FAILED_AWS_SIGNUP:
+        case AWS_SIGNUP_FAILED:
             return {
                 ...state,
                 isLoading: false,
                 error: action.payload.error,
             }
-        case ATTEMPT_AWS_CONFIRM_SIGNUP:
+        case AWS_CONFIRM_SIGNUP_ATTEMPT:
             return {
                 ...state,
                 confirmationCode: action.payload.confirmationCode,
             }
-        case SUCCESSFUL_AWS_CONFIRM_SIGNUP:
+        case AWS_CONFIRM_SIGNUP_SUCCESSFUL:
             return {
                 ...state,
                 isLoading: false,
             }
-        case FAILED_AWS_CONFIRM_SIGNUP:
+        case AWS_CONFIRM_SIGNUP_FAILED:
             return {
                 ...state,
                 isLoading: false,

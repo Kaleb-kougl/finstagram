@@ -48,12 +48,12 @@ function* attemptAWSPostPhoto() {
     console.log(response, error);
 
     if (response) {
-        yield put({ type: types.SUCCESSFUL_AWS_POST_PHOTO, payload: { isSuccess: true } })
+        yield put({ type: types.AWS_POST_PHOTO_SUCCESSFUL, payload: { isSuccess: true } })
     } else {
-        yield put({ type: types.FAILED_AWS_POST_PHOTO, payload: { error } })
+        yield put({ type: types.AWS_POST_PHOTO_FAILED, payload: { error } })
     }
 }
 
 export default function* postPhotoWatcher() {
-    yield takeLatest(types.ATTEMPT_AWS_POST_PHOTO, attemptAWSPostPhoto);
+    yield takeLatest(types.AWS_POST_PHOTO_ATTEMPT, attemptAWSPostPhoto);
 }

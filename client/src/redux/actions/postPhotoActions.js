@@ -1,16 +1,16 @@
 import * as TYPES from '../constants/actionTypes';
 
 export const attemptAWSPostPhoto = ({ photo, description }) => ({
-    type: TYPES.ATTEMPT_AWS_POST_PHOTO,
+    type: TYPES.AWS_POST_PHOTO_ATTEMPT,
     payload: { photo, description }
 });
 
 export const successfulAWSPostPhoto = ({ isSuccess }) => ({
-    type: TYPES.SUCCESSFUL_AWS_POST_PHOTO,
+    type: TYPES.AWS_POST_PHOTO_SUCCESSFUL,
     payload: { isSuccess }
 });
 
 export const failedAWSPostPhoto = ({ error }) => ({
-    type: TYPES.SUCCESSFUL_AWS_POST_PHOTO,
+    type: TYPES.AWS_POST_PHOTO_FAILED,
     payload: { error }
 });

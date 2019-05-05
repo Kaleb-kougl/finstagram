@@ -1,4 +1,4 @@
-import { THUMBNAIL_VIEW, PORTRAIT_VIEW } from '../constants/actionTypes';
+import { VIEW_THUMBNAIL, VIEW_PORTRAIT } from '../constants/actionTypes';
 
 const initialState = {
     thumbnailView: true,
@@ -7,12 +7,12 @@ const initialState = {
 export default function (state = initialState, action) {
     console.log(`profileReducer`, state, action);
     switch (action.type) {
-        case THUMBNAIL_VIEW:
+        case VIEW_THUMBNAIL:
             return {
                 ...state,
                 thumbnailView: true,
             }
-        case PORTRAIT_VIEW:
+        case VIEW_PORTRAIT:
             return {
                 ...state,
                 thumbnailView: false,

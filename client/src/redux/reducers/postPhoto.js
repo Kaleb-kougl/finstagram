@@ -1,7 +1,7 @@
 import {
-    ATTEMPT_AWS_POST_PHOTO,
-    SUCCESSFUL_AWS_POST_PHOTO,
-    FAILED_AWS_POST_PHOTO
+    AWS_POST_PHOTO_ATTEMPT,
+    AWS_POST_PHOTO_SUCCESSFUL,
+    AWS_POST_PHOTO_FAILED
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -14,20 +14,20 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case ATTEMPT_AWS_POST_PHOTO:
+        case AWS_POST_PHOTO_ATTEMPT:
             return {
                 ...state,
                 photo: action.payload.photo,
                 description: action.payload.description,
                 isLoading: true,
             };
-        case SUCCESSFUL_AWS_POST_PHOTO:
+        case AWS_POST_PHOTO_SUCCESSFUL:
             return {
                 ...state,
                 isLoading: false,
                 isSuccess: action.payload.isSuccess,
             };
-        case FAILED_AWS_POST_PHOTO:
+        case AWS_POST_PHOTO_FAILED:
             return {
                 ...state,
                 isLoading: false,

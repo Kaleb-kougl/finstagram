@@ -27,10 +27,10 @@ function* attemptAWSSignup() {
     const { response, error } = yield call(attemptSignup, email, password);
     if (response) {
         console.log('saga', response);
-        yield put({ type: types.SUCCESSFUL_AWS_SIGNUP, payload: { newUser: response } });
+        yield put({ type: types.AWS_SIGNUP_SUCCESSFUL, payload: { newUser: response } });
     } else {
         console.log('saga', error);
-        yield put({ type: types.FAILED_AWS_SIGNUP, payload: { error } });
+        yield put({ type: types.AWS_SIGNUP_FAILED, payload: { error } });
     }
 }
 
@@ -43,14 +43,14 @@ function* attemptAWSConfirmation() {
     const { response, error } = yield call(attemptConfirmation, email, confirmationCode);
     if (response) {
         console.log('saga', response);
-        yield put({ type: types.SUCCESSFUL_AWS_CONFIRM_SIGNUP, payload: {} });
+        yield put({ type: types.AWS_CONFIRM_SIGNUP_SUCCESSFUL, payload: {} });
     } else {
         console.log('saga', error);
-        yield put({ type: types.FAILED_AWS_CONFIRM_SIGNUP, payload: { error } });
+        yield put({ type: types.AWS_CONFIRM_SIGNUP_FAILED, payload: { error } });
     }
 }
 
 export default function* signupWatcher() {
-    yield takeLatest(types.ATTEMPT_AWS_SIGNUP, attemptAWSSignup);
-    yield takeLatest(types.ATTEMPT_AWS_CONFIRM_SIGNUP, attemptAWSConfirmation);
+    yield takeLatest(types.AWS_SIGNUP_ATTEMPT, attemptAWSSignup);
+    yield takeLatest(types.AWS_CONFIRM_SIGNUP_ATTEMPT, attemptAWSConfirmation);
 }

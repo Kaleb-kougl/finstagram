@@ -1,10 +1,10 @@
 import {
-    ATTEMPT_AWS_LOGIN,
-    SUCCESSFUL_AWS_LOGIN,
-    FAILED_AWS_LOGIN,
-    ATTEMPT_AWS_LOGOUT,
-    SUCCESSFUL_AWS_LOGOUT,
-    FAILED_AWS_LOGOUT,
+    AWS_LOGIN_ATTEMPT,
+    AWS_LOGIN_SUCCESSFUL,
+    AWS_LOGIN_FAILED,
+    AWS_LOGOUT_ATTEMPT,
+    AWS_LOGOUT_SUCCESSFUL,
+    AWS_LOGOUT_FAILED
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -19,7 +19,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case ATTEMPT_AWS_LOGIN:
+        case AWS_LOGIN_ATTEMPT:
             return {
                 ...state,
                 email: action.payload.email,
@@ -27,31 +27,31 @@ export default function (state = initialState, action) {
                 isLoading: true,
                 error: null,
             }
-        case SUCCESSFUL_AWS_LOGIN:
+        case AWS_LOGIN_SUCCESSFUL:
             return {
                 ...state,
                 isAuthenticated: true,
                 password: null,
                 isLoading: false,
             }
-        case FAILED_AWS_LOGIN:
+        case AWS_LOGIN_FAILED:
             return {
                 ...state,
                 isLoading: false,
                 error: action.payload.error,
             }
-        case ATTEMPT_AWS_LOGOUT:
+        case AWS_LOGOUT_ATTEMPT:
             return {
                 ...state,
                 isAuthenticated: false,
                 error: null,
             }
-        case FAILED_AWS_LOGOUT:
+        case AWS_LOGOUT_SUCCESSFUL:
             return {
                 ...state,
                 error: action.payload.error,
             }
-        case SUCCESSFUL_AWS_LOGOUT:
+        case AWS_LOGOUT_FAILED:
             return {
                 ...state,
                 isAuthenticated: false,

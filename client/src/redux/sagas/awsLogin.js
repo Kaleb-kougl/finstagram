@@ -23,12 +23,12 @@ function* attemptAWSLogin() {
 
     const { response, error } = yield call(attemptLogin, email, password);
     if (response) {
-        yield put({ type: types.SUCCESSFUL_AWS_LOGIN, payload: {} });
+        yield put({ type: types.AWS_LOGIN_SUCCESSFUL, payload: {} });
     } else {
-        yield put({ type: types.FAILED_AWS_LOGIN, payload: { error } });
+        yield put({ type: types.AWS_LOGIN_FAILED, payload: { error } });
     }
 }
 
 export default function* loginWatcher() {
-    yield takeLatest(types.ATTEMPT_AWS_LOGIN, attemptAWSLogin);
+    yield takeLatest(types.AWS_LOGIN_ATTEMPT, attemptAWSLogin);
 }

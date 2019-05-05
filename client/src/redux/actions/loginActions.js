@@ -1,16 +1,16 @@
 import * as TYPES from '../constants/actionTypes';
 
 export const attemptAWSLogin = (email, password) => ({
-    type: TYPES.ATTEMPT_AWS_LOGIN,
+    type: TYPES.AWS_LOGIN_ATTEMPT,
     payload: { email, password },
 });
 
 export const successfulAWSLogin = () => ({
-    type: TYPES.SUCCESSFUL_AWS_LOGIN,
+    type: TYPES.AWS_LOGIN_SUCCESSFUL,
     payload: {},
 });
 
 export const failedAWSLogin = (error) => ({
-    type: TYPES.FAILED_AWS_LOGIN,
+    type: TYPES.AWS_LOGIN_FAILED,
     payload: { error: error.message },
 });

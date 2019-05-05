@@ -1,16 +1,16 @@
 import * as TYPES from '../constants/actionTypes';
 
 export const attemptAWSLogout = () => ({
-    type: TYPES.ATTEMPT_AWS_LOGOUT,
+    type: TYPES.AWS_LOGOUT_ATTEMPT,
     payload: { isAuthenticated: false, },
 });
 
 export const successfulAWSLogout = () => ({
-    type: TYPES.SUCCESSFUL_AWS_LOGIN,
+    type: TYPES.AWS_LOGOUT_SUCCESSFUL,
     payload: {},
 });
 
 export const failedAWSLogout = (error) => ({
-    type: TYPES.FAILED_AWS_LOGIN,
+    type: TYPES.AWS_LOGOUT_FAILED,
     payload: { error: error.message },
 });
