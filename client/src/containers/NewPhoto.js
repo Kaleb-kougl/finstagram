@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { connect } from 'react-redux';
+import { attemptAWSPostPhoto } from '../redux/actions';
 import config from "../config";
 import "./styles/NewPhoto.css";
+
+// TODO - create a redirect once the photo has uploaded successfully. 
 
 class NewPhoto extends Component {
     constructor(props) {
@@ -71,7 +75,16 @@ class NewPhoto extends Component {
             return;
         }
 
+        if (!this.state.isLoading) {
+            await this.props.attemptAWSPostPhoto({ photo: this.state.photo, description: this.state.description });
+        }
         this.setState({ isLoading: true });
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (!prevProps.error && this.props.error) {
+            alert(this.props.error.message);
+        }
     }
 
     render() {
@@ -125,4 +138,10 @@ class NewPhoto extends Component {
     }
 }
 
-export default NewPhoto;
+const mapStateToProps = ({ postPhoto }) => ({
+    error: postPhoto.error
+});
+
+const mapDispatchToProps = { attemptAWSPostPhoto };
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewPhoto);

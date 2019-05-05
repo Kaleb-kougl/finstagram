@@ -1,6 +1,7 @@
 import { change_to_thumbnail, change_to_portrait } from './profileActions';
 import { attemptAWSLogin, successfulAWSLogin, failedAWSLogin } from './loginActions';
 import { attemptAWSLogout, successfulAWSLogout, failedAWSLogout } from './logoutActions';
+import { attemptAWSPostPhoto, successfulAWSPostPhoto, failedAWSPostPhoto } from './postPhotoActions';
 import {
     attemptAWSSignup,
     successfulAWSSignup,
@@ -25,4 +26,7 @@ export {
     attemptAWSLogout,
     successfulAWSLogout,
     failedAWSLogout,
+    attemptAWSPostPhoto,
+    successfulAWSPostPhoto,
+    failedAWSPostPhoto,
 };

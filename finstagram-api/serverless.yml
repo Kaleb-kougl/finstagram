@@ -65,13 +65,13 @@ functions:
           cors: true
           authorizer: aws_iam
   delete-photo:
-      handler: delete-photo.main
-      events:
-        - http:
-            path: photos/{id}
-            method: delete
-            cors: true
-            authorizer: aws_iam
+    handler: delete-photo.main
+    events:
+      - http:
+          path: photos/{id}
+          method: delete
+          cors: true
+          authorizer: aws_iam
 
 # Create our resources with separate CloudFormation templates
 resources:

@@ -50,7 +50,7 @@ function* attemptAWSConfirmation() {
     }
 }
 
-export default function* attemptAWSSignupWatcher() {
+export default function* signupWatcher() {
     yield takeLatest(types.ATTEMPT_AWS_SIGNUP, attemptAWSSignup);
     yield takeLatest(types.ATTEMPT_AWS_CONFIRM_SIGNUP, attemptAWSConfirmation);
 }

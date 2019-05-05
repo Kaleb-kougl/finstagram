@@ -6,10 +6,13 @@ import * as types from '../constants/actionTypes';
 const getEmail = ({ user }) => user.email;
 const getPassword = ({ user }) => user.password;
 
-function attemptLogin(email, password) {
-    return Auth.signIn(email, password)
-        .then(response => ({ response }))
-        .catch(error => ({ error }));
+async function attemptLogin(email, password) {
+    try {
+        const response = await Auth.signIn(email, password)
+        return { response };
+    } catch (error) {
+        return { error };
+    }
 }
 
 function* attemptAWSLogin() {
@@ -26,6 +29,6 @@ function* attemptAWSLogin() {
     }
 }
 
-export default function* attemptAWSLoginWatcher() {
+export default function* loginWatcher() {
     yield takeLatest(types.ATTEMPT_AWS_LOGIN, attemptAWSLogin);
 }

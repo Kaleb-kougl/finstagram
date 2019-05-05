@@ -1,12 +1,14 @@
 import { all } from 'redux-saga/effects';
-import attemptAWSLoginWatcher from './awsLogin';
+import loginWatcher from './awsLogin';
 import logoutWatcher from './awsLogout';
-import attemptAWSSignupWatcher from './awsSignup';
+import signupWatcher from './awsSignup';
+import postPhotoWatcher from './awsPostPhoto';
 
 export default function* rootSaga() {
     yield all([
-        attemptAWSLoginWatcher(),
+        loginWatcher(),
         logoutWatcher(),
-        attemptAWSSignupWatcher(),
+        signupWatcher(),
+        postPhotoWatcher(),
     ]);
 };

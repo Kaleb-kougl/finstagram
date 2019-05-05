@@ -2,13 +2,13 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import { Auth } from 'aws-amplify';
 import * as types from '../constants/actionTypes';
 
-function attemptLogout() {
-    return Auth.signOut()
-        .then(response => {
-            console.log(response);
-            return { signedOut: true }
-        })
-        .catch(error => ({ error }));
+async function attemptLogout() {
+    try {
+        const response = await Auth.signOut()
+        return { response };
+    } catch (error) {
+        return { error };
+    }
 }
 
 function* attemptAWSLogout() {
