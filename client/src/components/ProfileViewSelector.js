@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ButtonToolbar, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTh, faImage } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
-import { change_to_thumbnail, change_to_portrait } from '../redux/actions';
+import { change_to_thumbnail, change_to_portrait } from '../actions';
 
 library.add(faTh, faImage);
 

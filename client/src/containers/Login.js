@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { navigate } from "@reach/router";
 import { connect } from 'react-redux';
-import { attemptAWSLogin } from '../redux/actions';
+import { attemptAWSLogin } from '../actions';
 import "./styles/Login.css";
 
 class Login extends Component {

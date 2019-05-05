@@ -7,7 +7,7 @@ import {
     attemptAWSSignup,
     attemptAWSConfirmSignup,
     attemptAWSLogin
-} from '../redux/actions';
+} from '../actions';
 import "./styles/Signup.css";
 
 class Signup extends Component {

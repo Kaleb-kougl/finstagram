@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Router } from "@reach/router";
 import { Auth } from 'aws-amplify';
 import { connect } from 'react-redux';
-import { successfulAWSLogin } from './redux/actions';
+import { successfulAWSLogin } from './actions';
 import { Navigation } from './components';
 import {
   Profile,

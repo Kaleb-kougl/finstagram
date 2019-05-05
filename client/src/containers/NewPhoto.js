@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
-import { attemptAWSPostPhoto } from '../redux/actions';
+import { attemptAWSPostPhoto } from '../actions';
 import { navigate } from "@reach/router";
 import config from "../config";
 import "./styles/NewPhoto.css";

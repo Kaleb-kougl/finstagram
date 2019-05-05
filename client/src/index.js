@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import Amplify from "aws-amplify";
 import App from './App';
-import store from './redux/store';
+import store from './store';
 import config from './config';
 import * as serviceWorker from './serviceWorker';
 

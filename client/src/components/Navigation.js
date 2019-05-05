@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { navigate } from '@reach/router';
 import { connect } from 'react-redux';
-import { attemptAWSLogout } from '../redux/actions';
+import { attemptAWSLogout } from '../actions';
 import './styles/Navigation.css';
 
 class Navigation extends Component {
