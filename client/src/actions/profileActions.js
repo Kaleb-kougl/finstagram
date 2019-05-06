@@ -9,3 +9,18 @@ export const change_to_portrait = () => ({
     type: TYPES.VIEW_PORTRAIT,
     payload: {},
 });
+
+export const attemptLoadProfile = () => ({
+    type: TYPES.LOAD_PROFILE_ATTEMPT,
+    payload: {},
+});
+
+export const successfulLoadProfile = ({ photos }) => ({
+    type: TYPES.LOAD_PROFILE_SUCCESS,
+    payload: { photos }
+});
+
+export const failedLoadProfile = ({ error }) => ({
+    type: TYPES.LOAD_PROFILE_FAILED,
+    payload: { error }
+});

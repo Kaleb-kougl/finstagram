@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { attemptLoadProfile } from '../actions';
 import './styles/ProfileImageList.css';
 
 class ProfileImageList extends Component {
@@ -80,6 +81,11 @@ class ProfileImageList extends Component {
         console.log(this.props);
     }
 
+    componentWillMount() {
+        this.props.attemptLoadProfile();
+        console.log('attempting to load profile');
+    }
+
     render() {
         const Images = this.props.thumbnailView ? this.state.images.map((image, i) =>
             <img
@@ -109,4 +115,6 @@ const mapStateToProps = state => {
     return { thumbnailView: state.profile.thumbnailView }
 }
 
-export default connect(mapStateToProps)(ProfileImageList);
+const mapDispatchToProps = { attemptLoadProfile };
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileImageList);

@@ -1,7 +1,15 @@
-import { VIEW_THUMBNAIL, VIEW_PORTRAIT } from '../constants/actionTypes';
+import {
+    VIEW_THUMBNAIL,
+    VIEW_PORTRAIT,
+    LOAD_PROFILE_ATTEMPT,
+    LOAD_PROFILE_SUCCESS,
+    LOAD_PROFILE_FAILED
+} from '../constants/actionTypes';
 
 const initialState = {
     thumbnailView: true,
+    photos: null,
+    error: null,
 };
 
 export default function (state = initialState, action) {
@@ -16,6 +24,20 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 thumbnailView: false,
+            }
+        case LOAD_PROFILE_ATTEMPT:
+            return {
+                ...state,
+            }
+        case LOAD_PROFILE_SUCCESS:
+            return {
+                ...state,
+                photos: action.payload.photos,
+            }
+        case LOAD_PROFILE_FAILED:
+            return {
+                ...state,
+                error: action.payload.error,
             }
         default:
             return state;
