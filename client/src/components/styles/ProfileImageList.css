@@ -8,12 +8,36 @@
 
 .thumbnail {
     min-height: 30vw;
-    width: 32vw;
+    /* max-height: 30vw; */
+    width: 32.5vw;
+}
+
+@keyframes shadow {
+    0% {box-shadow: none;}
+    100% { box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
+}
+
+.thumbnail:hover {
+    transform: scale(1.15);
+    transition: transform 0.4s ease-in-out;
+}
+
+.thumbnail-links {
+    overflow: hidden;
     margin-bottom: 0.5vw;
+    padding: 0;
+}
+
+.imagefeed-links:hover {
+    animation: shadow 0.4s ease-in-out 0s 1 forwards;
 }
 
 .imagefeed-image {
     height: 99vh;
     width: 100%;
-    margin-bottom: 1vw;
+    /* margin-bottom: 1vw; */
+}
+
+.imagefeed-links {
+    margin-bottom: 1.2vh;
 }

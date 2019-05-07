@@ -35,7 +35,7 @@ class ProfileImageList extends Component {
 
     render() {
         const Images = this.state.isLoading ? <p>loading!</p> : this.props.thumbnailView ? this.props.photos.map((image, i) =>
-            <Link to={`/photo/${image.photoId}`} key={i}>
+            <Link to={`/photo/${image.photoId}`} key={i} className="thumbnail-links">
                 <img
                     src={image.photo}
                     alt={image.description}
@@ -43,7 +43,7 @@ class ProfileImageList extends Component {
                 />
             </Link>
         ) : this.props.photos.map((image, i) =>
-            <Link to={`/photo/${image.photoId}`} key={i}>
+            <Link to={`/photo/${image.photoId}`} key={i} className="imagefeed-links">
                 <img
                     src={image.photo}
                     alt={image.description}
