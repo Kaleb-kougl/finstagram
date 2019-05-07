@@ -10,6 +10,7 @@ import {
   Login,
   Signup,
   NewPhoto,
+  SinglePhoto
 } from './containers';
 
 
@@ -35,6 +36,7 @@ class App extends Component {
           <Login path="/login" />
           <Signup path="/signup" />
           <NewPhoto path="/newphoto" />
+          <SinglePhoto path="/photo/:photoId" />
           <NotFound default />
         </Router>
       </div>

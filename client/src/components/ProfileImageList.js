@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { attemptLoadProfile } from '../actions';
+import { Link } from "@reach/router";
 import './styles/ProfileImageList.css';
 
 class ProfileImageList extends Component {
@@ -18,7 +19,11 @@ class ProfileImageList extends Component {
     }
 
     componentWillMount() {
-        this.props.attemptLoadProfile();
+        if (!this.props.photos) {
+            this.props.attemptLoadProfile();
+        } else {
+            this.setState({ isLoading: false });
+        }
         console.log('attempting to load profile');
     }
 
@@ -30,19 +35,21 @@ class ProfileImageList extends Component {
 
     render() {
         const Images = this.state.isLoading ? <p>loading!</p> : this.props.thumbnailView ? this.props.photos.map((image, i) =>
-            <img
-                src={image.photo}
-                key={i}
-                alt={image.description}
-                className={`thumbnail space${i % 3}`}
-            />
+            <Link to={`/photo/${image.photoId}`} key={i}>
+                <img
+                    src={image.photo}
+                    alt={image.description}
+                    className={`thumbnail space${i % 3}`}
+                />
+            </Link>
         ) : this.props.photos.map((image, i) =>
-            <img
-                src={image.photo}
-                key={i}
-                alt={image.description}
-                className="imagefeed-image"
-            />
+            <Link to={`/photo/${image.photoId}`} key={i}>
+                <img
+                    src={image.photo}
+                    alt={image.description}
+                    className="imagefeed-image"
+                />
+            </Link>
         );
         return (
             <div className="imagefeed">

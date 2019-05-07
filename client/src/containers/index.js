@@ -3,6 +3,7 @@ import NotFound from './NotFound';
 import Login from './Login';
 import Signup from './Signup';
 import NewPhoto from './NewPhoto';
+import SinglePhoto from './SinglePhoto';
 
 export {
     Profile,
@@ -10,4 +11,5 @@ export {
     Login,
     Signup,
     NewPhoto,
+    SinglePhoto,
 };
