@@ -26,9 +26,9 @@ class SinglePhoto extends Component {
     render() {
         return (
             <div>
-                <p>Header</p>
                 <div>img: {this.props.photoId}</div>
                 {this.state.img ? <img src={this.state.img.photo} alt={this.state.img.description} /> : <div>no image found</div>}
+                {this.state.img ? <p class="description">{this.state.img.description}</p> : <p>Loading...</p>}
                 <div>comments</div>
             </div>
         )
