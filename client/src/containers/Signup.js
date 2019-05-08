@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Form from 'react-bootstrap/Form';
-import Button from "react-bootstrap/Button";
 import { connect } from 'react-redux';
 import { navigate } from "@reach/router";
 import {
@@ -8,6 +7,7 @@ import {
     attemptAWSConfirmSignup,
     attemptAWSLogin
 } from '../actions';
+import { LoaderButton } from '../components';
 import "./styles/Signup.css";
 
 class Signup extends Component {
@@ -64,7 +64,6 @@ class Signup extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log('component updated', this.props);
         if (!this.state.isError && this.props.error && this.props.error.code === "UsernameExistsException") {
             alert(this.props.error.message);
             alert('caught ya');
@@ -94,14 +93,15 @@ class Signup extends Component {
                         Please check your email for the code.
                     </Form.Text>
                 </Form.Group>
-                <Button
+                <LoaderButton
                     block
-                    disable={!this.validateConfirmationForm()}
+                    disabled={!this.validateConfirmationForm()}
                     type="submit"
                     variant="light"
-                >
-                    Verify
-                </Button>
+                    text="Verify"
+                    loadingText="Loading..."
+                    isLoading={this.state.isLoading}
+                />
             </Form>
         );
     }
@@ -137,14 +137,15 @@ class Signup extends Component {
                         placeholder="One more time..."
                     />
                 </Form.Group>
-                <Button
+                <LoaderButton
                     block
-                    disable={!this.validateForm()}
+                    disabled={!this.validateForm()}
                     type="submit"
                     variant="light"
-                >
-                    Signup
-                </Button>
+                    text="Signup"
+                    loadingText="loading"
+                    isLoading={this.state.isLoading}
+                />
             </Form>
         );
     }

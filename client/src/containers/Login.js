@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { navigate } from "@reach/router";
 import { connect } from 'react-redux';
 import { attemptAWSLogin } from '../actions';
+import { LoaderButton } from '../components';
 import "./styles/Login.css";
 
 class Login extends Component {
@@ -14,6 +14,7 @@ class Login extends Component {
             email: "",
             password: "",
             isError: false,
+            isLoading: false,
         };
 
     }
@@ -30,7 +31,7 @@ class Login extends Component {
 
     handleSubmit = async event => {
         event.preventDefault();
-
+        this.setState({ isLoading: true });
         this.props.attemptAWSLogin(this.state.email, this.state.password);
     }
 
@@ -38,6 +39,7 @@ class Login extends Component {
         if (!prevProps.error && this.props.error) {
             this.setState({ isError: true });
             alert(this.props.error.message);
+            this.setState({ isLoading: false });
         } else if (!prevProps.isAuthenticated && this.props.isAuthenticated) {
             alert('successfull logged in!');
             navigate('/');
@@ -68,16 +70,16 @@ class Login extends Component {
                             className="signup-btn"
                         />
                     </Form.Group>
-                    <Button
+                    <LoaderButton
                         block
                         disabled={!this.validateForm()}
                         type="submit"
                         variant="light"
                         className="login-btn"
-                        placeholder="Password"
-                    >
-                        Login
-                    </Button>
+                        text="Login"
+                        loadingText="loading"
+                        isLoading={this.state.isLoading}
+                    />
                 </Form>
             </div>
         );

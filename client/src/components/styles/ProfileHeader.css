@@ -50,3 +50,12 @@
     justify-self: center;
     text-align: center;
 }
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg); }
+    to { transform: scale(1) rotate(360deg); }
+}
+
+.settings-profile-btn:hover .settings-svg{
+    animation: spin 1.5s infinite linear;
+}

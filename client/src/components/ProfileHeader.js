@@ -57,7 +57,7 @@ class ProfileHeader extends Component {
                 </p>
                 <Button variant="light" className="edit-profile-btn">Edit Profile</Button>
                 <Button variant="light" className="settings-profile-btn">
-                    <FontAwesomeIcon icon="cog" />
+                    <FontAwesomeIcon icon="cog" className="settings-svg" />
                 </Button>
 
             </section >
