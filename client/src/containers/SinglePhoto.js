@@ -13,9 +13,13 @@ class SinglePhoto extends Component {
     }
 
     grabSingularPhoto = (id) => {
-        console.log(this.props.photos);
-        const viewingPhoto = this.props.photos.filter(photo => photo.photoId === this.props.photoId);
-        this.setState({ img: viewingPhoto[0] || null });
+        let viewingPhoto;
+        if (this.props.photos !== null) {
+            viewingPhoto = this.props.photos.filter(photo => photo.photoId === this.props.photoId);
+            this.setState({ img: viewingPhoto[0] || null });
+        } else {
+            // dispatch action to get the photo
+        }
     }
 
     componentDidMount() {
@@ -26,9 +30,8 @@ class SinglePhoto extends Component {
     render() {
         return (
             <div>
-                <div>img: {this.props.photoId}</div>
                 {this.state.img ? <img src={this.state.img.photo} alt={this.state.img.description} /> : <div>no image found</div>}
-                {this.state.img ? <p class="description">{this.state.img.description}</p> : <p>Loading...</p>}
+                {this.state.img ? <p className="description">{this.state.img.description}</p> : <p>Loading...</p>}
                 <div>comments</div>
             </div>
         )

@@ -81,7 +81,6 @@ class NewPhoto extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log(this.props);
         if (!prevProps.error && this.props.error) {
             alert(this.props.error.message);
         } else if (!prevProps.isSuccess && this.props.isSuccess) {
