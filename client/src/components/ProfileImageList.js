@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { attemptLoadProfile } from '../actions';
 import { Link } from "@reach/router";
+import ScrollToTopButton from './ScrollToTopButton';
 import './styles/ProfileImageList.css';
 
 class ProfileImageList extends Component {
@@ -54,6 +55,7 @@ class ProfileImageList extends Component {
         return (
             <div className="imagefeed">
                 {Images}
+                <ScrollToTopButton />
             </div>
         )
     }

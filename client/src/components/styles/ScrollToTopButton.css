@@ -1,0 +1,25 @@
+.invisible {
+    display: none;
+}
+
+@keyframes fade-in {
+    from { 
+        opacity: 0;
+    }
+    to {
+        opacity: 0.8;
+    }
+}
+
+.visible {
+    position: fixed;
+    bottom: 2px;
+    right: 10px;
+    font-size: 24pt;
+    animation: fade-in 0.2s ease-in-out;
+}
+
+.visible:hover {
+    transform: scale(1.15);
+    transition: transform 0.4s ease-out;
+}
