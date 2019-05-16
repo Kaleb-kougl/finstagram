@@ -2,7 +2,8 @@ import React from 'react';
 import {
     ProfileHeader,
     ProfileImageList,
-    ProfileViewSelector
+    ProfileViewSelector,
+    ScrollToTopButton
 } from '../components';
 
 export default function Profile() {
@@ -11,6 +12,7 @@ export default function Profile() {
             <ProfileHeader />
             <ProfileViewSelector />
             <ProfileImageList />
+            <ScrollToTopButton />
         </>
     )
 }

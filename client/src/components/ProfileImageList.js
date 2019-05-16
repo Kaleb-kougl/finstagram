@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { attemptLoadProfile } from '../actions';
 import { Link } from "@reach/router";
-import ScrollToTopButton from './ScrollToTopButton';
 import './styles/ProfileImageList.css';
 
 class ProfileImageList extends Component {
@@ -15,17 +14,12 @@ class ProfileImageList extends Component {
         }
     }
 
-    componentWillReceiveProps() {
-        console.log(this.props);
-    }
-
     componentWillMount() {
         if (!this.props.photos) {
             this.props.attemptLoadProfile();
         } else {
             this.setState({ isLoading: false });
         }
-        console.log('attempting to load profile');
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -55,14 +49,12 @@ class ProfileImageList extends Component {
         return (
             <div className="imagefeed">
                 {Images}
-                <ScrollToTopButton />
             </div>
         )
     }
 }
 
 const mapStateToProps = ({ profile }) => {
-    console.log(profile);
     return {
         thumbnailView: profile.thumbnailView,
         photos: profile.photos,

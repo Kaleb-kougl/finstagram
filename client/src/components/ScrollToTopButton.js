@@ -18,11 +18,9 @@ class ScrollToTopButton extends Component {
     componentDidMount() {
         this.setState({ windowHeight: window.innerHeight });
         window.addEventListener('scroll', this.handleScroll);
-        console.log('window height is: ', window.innerHeight);
     }
 
     handleScroll = (event) => {
-        console.log(window.scrollY);
         if (window.scrollY > this.state.windowHeight) {
             this.setState({ isVisible: true });
         } else {
