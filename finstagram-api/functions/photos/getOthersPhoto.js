@@ -1,13 +1,13 @@
-import * as dynamoDbLib from "../libs/dynamodb-lib";
-import { success, failure } from "../libs/response-lib";
+import * as dynamoDbLib from "../../libs/dynamodb-lib";
+import { success, failure } from "../../libs/response-lib";
 
 export async function main(event, context) {
     console.log(event);
     const params = {
         TableName: "photos",
         Key: {
-            userId: event.requestContext.identity.cognitoIdentityId,
-            photoId: event.pathParameters.id
+            userId: event.pathParameters.id_user,
+            photoId: event.pathParameters.id_photo
         }
     };
 

@@ -1,18 +1,18 @@
 import uuid from "uuid";
-import * as dynamoDbLib from "../libs/dynamodb-lib";
-import { success, failure } from "../libs/response-lib";
+import * as dynamoDbLib from "../../libs/dynamodb-lib";
+import { success, failure } from "../../libs/response-lib";
 
 export async function main(event, context) {
     // Request body is passed in as a JSON encoded string in 'event.body'
     const data = JSON.parse(event.body);
 
     const params = {
-        TableName: "photo_comments",
+        TableName: "photos",
         Item: {
-            photoId: event.pathParameters.id_photo,
-            commentId: uuid.v1(),
             userId: event.requestContext.identity.cognitoIdentityId,
-            commentText: data.commentText,
+            photoId: uuid.v1(),
+            description: data.description,
+            photo: data.photo,
             createdAt: Date.now()
         }
     };
