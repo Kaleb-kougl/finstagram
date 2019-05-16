@@ -1,17 +1,18 @@
-import * as dynamoDbLib from "./libs/dynamodb-lib";
-import { success, failure } from "./libs/response-lib";
+import * as dynamoDbLib from "../libs/dynamodb-lib";
+import { success, failure } from "../libs/response-lib";
 
 export async function main(event, context) {
     const data = JSON.parse(event.body);
     const params = {
-        TableName: "photo_comments",
+        TableName: "photos",
         Key: {
-            photoId: event.pathParameters.id_photo,
-            commentId: data.id_comment,
+            userId: event.requestContext.identity.cognitoIdentityId,
+            photoId: event.pathParameters.id
         },
-        UpdateExpression: "SET commentText = :commentText",
+        UpdateExpression: "SET description = :description, photo = :photo",
         ExpressionAttributeValues: {
-            ":commentText": data.commentText || null
+            ":photo": data.photo || null,
+            ":description": data.description || null
         },
         ReturnValues: "ALL_NEW"
     };

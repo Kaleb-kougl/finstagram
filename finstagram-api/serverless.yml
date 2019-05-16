@@ -33,7 +33,7 @@ provider:
 
 functions:
   create:
-    handler: create.main
+    handler: photoFunctions/create.main
     events:
       - http:
           path: photos
@@ -41,7 +41,7 @@ functions:
           cors: true
           authorizer: aws_iam
   get:
-    handler: get.main
+    handler: photoFunctions/get.main
     events:
       - http:
           path: photos/{id}
@@ -49,7 +49,7 @@ functions:
           cors: true
           authorizer: aws_iam
   get-others-photo:
-    handler: getOthersPhoto.main
+    handler: photoFunctions/getOthersPhoto.main
     events:
       - http:
           path: photo/{id_user}/{id_photo}
@@ -57,7 +57,7 @@ functions:
           cors: true
           authorizer: aws_iam
   user-specific-list:
-    handler: user-specific-list.main
+    handler: photoFunctions/user-specific-list.main
     events:
       - http:
           path: userPhotos
@@ -65,7 +65,7 @@ functions:
           cors: true
           authorizer: aws_iam
   get-others-list-of-photos:
-    handler: getOthersListOfPhotos.main
+    handler: photoFunctions/getOthersListOfPhotos.main
     events:
       - http:
           path: photos/{id_user}/list
@@ -73,7 +73,7 @@ functions:
           cors: true
           authorizer: aws_iam
   update-photo:
-    handler: update-photo.main
+    handler: photoFunctions/update-photo.main
     events:
       - http:
           path: photos/{id}
@@ -81,7 +81,7 @@ functions:
           cors: true
           authorizer: aws_iam
   delete-photo:
-    handler: delete-photo.main
+    handler: photoFunctions/delete-photo.main
     events:
       - http:
           path: photos/{id}
@@ -89,7 +89,7 @@ functions:
           cors: true
           authorizer: aws_iam
   create-comment:
-    handler: createComment.main
+    handler: commentFunctions/createComment.main
     events:
       - http:
           path: comments/{id_photo}
@@ -97,7 +97,7 @@ functions:
           cors: true
           authorizer: aws_iam
   get-comments-list:
-    handler: getCommentsList.main
+    handler: commentFunctions/getCommentsList.main
     events:
       - http:
           path: comments/{id_photo}
@@ -105,7 +105,7 @@ functions:
           cors: true
           authorizer: aws_iam
   update-comment:
-    handler: updateComment.main
+    handler: commentFunctions/updateComment.main
     events:
       - http:
           path: comments/{id_photo}
@@ -113,7 +113,7 @@ functions:
           cors: true
           authorizer: aws_iam
   # delete-comment:
-  #   handler: delete-comment.main
+  #   handler: commentFunctions/delete-comment.main
   #   events:
   #     - http:
   #         path: comments/{id_photo}
