@@ -5,6 +5,7 @@ import { Link } from '@reach/router';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import './styles/SinglePhoto.css';
 
 library.add(faArrowLeft);
 
@@ -35,13 +36,13 @@ class SinglePhoto extends Component {
 
     render() {
         return (
-            <div>
-                <Link to="../../">
+            <div className="singlePhotoContainer">
+                <Link to="../../" className="back-btn">
                     <Button variant="outline-danger">
                         <FontAwesomeIcon icon="arrow-left" className="backArrow" />
                     </Button>
                 </Link>
-                {this.state.img ? <img src={this.state.img.photo} alt={this.state.img.description} /> : <div>no image found</div>}
+                {this.state.img ? <img src={this.state.img.photo} alt={this.state.img.description} className="singlePhoto" /> : <div>no image found</div>}
                 {this.state.img ? <p className="description">{this.state.img.description}</p> : <p>Loading...</p>}
                 <div>comments</div>
             </div>

@@ -8,7 +8,7 @@ import { change_to_thumbnail, change_to_portrait } from '../actions';
 
 library.add(faTh, faImage);
 
-function ProfileViewSelector({ change_to_portrait, change_to_thumbnail }, ...props) {
+function ProfileViewSelector(props) {
     return (
         <ButtonToolbar className="profile-view-container">
             <ToggleButtonGroup
@@ -19,7 +19,7 @@ function ProfileViewSelector({ change_to_portrait, change_to_thumbnail }, ...pro
             >
                 <ToggleButton
                     value={`thumbnail`}
-                    onClick={change_to_thumbnail}
+                    onClick={props.change_to_thumbnail}
                     className="thumbnail-view-btn btn"
                     variant="light"
                 >
@@ -27,7 +27,7 @@ function ProfileViewSelector({ change_to_portrait, change_to_thumbnail }, ...pro
                 </ToggleButton>
                 <ToggleButton
                     value={`portrait`}
-                    onClick={change_to_portrait}
+                    onClick={props.change_to_portrait}
                     className="thumbnail-view-btn btn"
                     variant="light"
                 >

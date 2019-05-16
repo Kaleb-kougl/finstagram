@@ -1,0 +1,18 @@
+.singlePhotoContainer {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
+}
+
+.back-btn {
+    position: absolute;
+    top: 40vh;
+}
+
+.singlePhoto {
+    width: 70vw;
+    height: auto;
+    margin: auto;
+    padding-top: 10px;
+}
