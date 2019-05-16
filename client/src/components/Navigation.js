@@ -19,6 +19,39 @@ class Navigation extends Component {
         }
     }
 
+    renderAuthenticatedNav() {
+        return (
+            <>
+                <Link to="/newphoto">
+                    <Nav.Link
+                        as="span"
+                    >
+                        Add Photo
+                    </Nav.Link>
+                </Link>
+                <Nav.Item
+                    onClick={this.handleLogout}
+                    className="logout-btn"
+                >
+                    Logout
+                </Nav.Item>
+            </>
+        );
+    }
+
+    renderNonAuthenticatedNav() {
+        return (
+            <>
+                <Link to="/signup">
+                    <Nav.Link as="span">Signup</Nav.Link>
+                </Link>
+                <Link to="/login">
+                    <Nav.Link as="span">Login</Nav.Link>
+                </Link>
+            </>
+        );
+    }
+
     render() {
         return (
             <Navbar bg="light" expand="lg" >
@@ -29,18 +62,8 @@ class Navigation extends Component {
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                     {
                         this.props.isAuthenticated ?
-                            <Nav.Item onClick={this.handleLogout} className="logout-btn">
-                                Logout
-                            </Nav.Item>
-                            :
-                            <>
-                                <Link to="/signup">
-                                    <Nav.Link as="span">Signup</Nav.Link>
-                                </Link>
-                                <Link to="/login">
-                                    <Nav.Link as="span">Login</Nav.Link>
-                                </Link>
-                            </>
+                            this.renderAuthenticatedNav()
+                            : this.renderNonAuthenticatedNav()
                     }
                 </Navbar.Collapse>
             </Navbar>
