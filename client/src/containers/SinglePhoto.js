@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
+import { Link } from '@reach/router';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faArrowLeft);
 
 class SinglePhoto extends Component {
     constructor(props) {
@@ -23,13 +30,17 @@ class SinglePhoto extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.photos);
         this.grabSingularPhoto(this.props.photoId);
     }
 
     render() {
         return (
             <div>
+                <Link to="../../">
+                    <Button variant="outline-danger">
+                        <FontAwesomeIcon icon="arrow-left" className="backArrow" />
+                    </Button>
+                </Link>
                 {this.state.img ? <img src={this.state.img.photo} alt={this.state.img.description} /> : <div>no image found</div>}
                 {this.state.img ? <p className="description">{this.state.img.description}</p> : <p>Loading...</p>}
                 <div>comments</div>
