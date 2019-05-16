@@ -112,14 +112,14 @@ functions:
           method: put
           cors: true
           authorizer: aws_iam
-  # delete-comment:
-  #   handler: functions/comments/delete-comment.main
-  #   events:
-  #     - http:
-  #         path: comments/{id_photo}
-  #         method: delete
-  #         cors: true
-  #         authroizer: aws_iam
+  delete-comment:
+    handler: functions/comments/deleteComment.main
+    events:
+      - http:
+          path: comments/{id_photo}
+          method: delete
+          cors: true
+          authroizer: aws_iam
 
 # Create our resources with separate CloudFormation templates
 resources:
