@@ -1,0 +1,11 @@
+{
+    "body": "{\"commentText\":\"other world\",\"id_comment\":\"e828c080-7773-11e9-bf7a-8d1925c07bba\"}",
+    "pathParameters": {
+        "id_photo": "26846f00-67ac-11e9-b1b7-7550ef0007d1"
+    },
+    "requestContext": {
+        "identity": {
+            "cognitoIdentityId": "USER-SUB-1234"
+        }
+    }
+}

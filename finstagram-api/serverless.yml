@@ -48,11 +48,27 @@ functions:
           method: get
           cors: true
           authorizer: aws_iam
+  get-others-photo:
+    handler: getOthersPhoto.main
+    events:
+      - http:
+          path: photo/{id_user}/{id_photo}
+          method: get
+          cors: true
+          authorizer: aws_iam
   user-specific-list:
     handler: user-specific-list.main
     events:
       - http:
           path: userPhotos
+          method: get
+          cors: true
+          authorizer: aws_iam
+  get-others-list-of-photos:
+    handler: getOthersListOfPhotos.main
+    events:
+      - http:
+          path: photos/{id_user}/list
           method: get
           cors: true
           authorizer: aws_iam
@@ -72,6 +88,38 @@ functions:
           method: delete
           cors: true
           authorizer: aws_iam
+  create-comment:
+    handler: createComment.main
+    events:
+      - http:
+          path: comments/{id_photo}
+          method: post
+          cors: true
+          authorizer: aws_iam
+  get-comments-list:
+    handler: getCommentsList.main
+    events:
+      - http:
+          path: comments/{id_photo}
+          method: get
+          cors: true
+          authorizer: aws_iam
+  update-comment:
+    handler: updateComment.main
+    events:
+      - http:
+          path: comments/{id_photo}
+          method: put
+          cors: true
+          authorizer: aws_iam
+  # delete-comment:
+  #   handler: delete-comment.main
+  #   events:
+  #     - http:
+  #         path: comments/{id_photo}
+  #         method: delete
+  #         cors: true
+  #         authroizer: aws_iam
 
 # Create our resources with separate CloudFormation templates
 resources:
