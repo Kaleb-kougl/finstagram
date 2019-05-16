@@ -8,14 +8,14 @@ import { change_to_thumbnail, change_to_portrait } from '../actions';
 
 library.add(faTh, faImage);
 
-function ProfileViewSelector({ change_to_portrait, change_to_thumbnail }) {
+function ProfileViewSelector({ change_to_portrait, change_to_thumbnail }, ...props) {
     return (
         <ButtonToolbar className="profile-view-container">
             <ToggleButtonGroup
                 type="radio"
                 name="view-options"
-                defaultValue={`thumbnail`}
                 style={{ width: `100%` }}
+                defaultValue={props.thumbnailView ? `thumbnail` : `portrait`}
             >
                 <ToggleButton
                     value={`thumbnail`}
@@ -34,10 +34,16 @@ function ProfileViewSelector({ change_to_portrait, change_to_thumbnail }) {
                     <FontAwesomeIcon icon="image" />
                 </ToggleButton>
             </ToggleButtonGroup>
-        </ButtonToolbar >
+        </ButtonToolbar>
     )
 }
 
-const mapDispatchToProps = ({ change_to_portrait, change_to_thumbnail })
+const mapStateToProps = ({ profile }) => {
+    return {
+        thumbnailView: profile.thumbnailView
+    }
+}
 
-export default connect(null, mapDispatchToProps)(ProfileViewSelector);
+const mapDispatchToProps = ({ change_to_portrait, change_to_thumbnail });
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileViewSelector);

@@ -17,6 +17,7 @@ class ProfileImageList extends Component {
     componentWillMount() {
         if (!this.props.photos) {
             this.props.attemptLoadProfile();
+            this.setState({ thumbnailView: this.props.thumbnailView });
         } else {
             this.setState({ isLoading: false });
         }
