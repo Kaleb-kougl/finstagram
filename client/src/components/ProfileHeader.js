@@ -66,7 +66,6 @@ class ProfileHeader extends Component {
 }
 
 const mapStateToProps = ({ profile }) => {
-    console.log(profile);
     return {
         thumbnailView: profile.thumbnailView,
         photos: profile.photos,

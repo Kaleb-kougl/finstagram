@@ -13,7 +13,6 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-    console.log(`profileReducer`, state, action);
     switch (action.type) {
         case VIEW_THUMBNAIL:
             return {
