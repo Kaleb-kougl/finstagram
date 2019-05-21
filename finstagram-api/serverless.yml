@@ -29,7 +29,9 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:us-east-2:454067702093:table/photos"
+      Resource: 
+        - "arn:aws:dynamodb:us-east-2:454067702093:table/photos"
+        - "arn:aws:dynamodb:us-east-2:454067702093:table/photo_comments"
 
 functions:
   create:
@@ -52,7 +54,7 @@ functions:
     handler: functions/photos/getOthersPhoto.main
     events:
       - http:
-          path: photo/{id_user}/{id_photo}
+          path: photo/{id}/{id_user}
           method: get
           cors: true
           authorizer: aws_iam
@@ -68,7 +70,7 @@ functions:
     handler: functions/photos/getOthersListOfPhotos.main
     events:
       - http:
-          path: photos/{id_user}/list
+          path: photos/{id}/list
           method: get
           cors: true
           authorizer: aws_iam
