@@ -5,7 +5,7 @@ import { Link } from '@reach/router';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { attemptAWSLoadPhotoComments } from '../actions';
+import { attemptAWSLoadPhotoComments, clearPhotoDetails } from '../actions';
 import './styles/SinglePhoto.css';
 
 library.add(faArrowLeft);
@@ -14,7 +14,7 @@ class SinglePhoto extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            comments: [],
+            comments: null,
             likes: 0,
             description: null,
             img: null,
@@ -33,10 +33,29 @@ class SinglePhoto extends Component {
 
     componentDidMount() {
         this.grabSingularPhoto(this.props.photoId);
-        // This can make the request for the comments.
-        // dispatch action for photo comments
-        console.log(this.props.photoId)
         this.props.attemptAWSLoadPhotoComments(this.props.photoId);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.comments === null && this.props.comments !== null) {
+            this.setState({ comments: this.props.comments });
+        }
+    }
+
+    renderComments = () => {
+        const comments = this.state.comments.map((comment, i) =>
+            <p key={i} className="comment">
+                <span className="comment-username">{comment.userId}</span> {comment.commentText}
+            </p>
+        );
+        if (comments.length === 0) {
+            return <p className="comment">No comments!</p>;
+        }
+        return comments;
+    }
+
+    componentWillUnmount() {
+        this.props.clearPhotoDetails();
     }
 
     render() {
@@ -49,16 +68,19 @@ class SinglePhoto extends Component {
                 </Link>
                 {this.state.img ? <img src={this.state.img.photo} alt={this.state.img.description} className="singlePhoto" /> : <div>no image found</div>}
                 {this.state.img ? <p className="description">{this.state.img.description}</p> : <p>Loading...</p>}
-                <div>comments</div>
+                <article className="comments-container">
+                    {this.state.comments !== null ? this.renderComments() : <div>Loading comments...</div>}
+                </article>
             </div>
         )
     }
 }
 
-const mapStateToProps = ({ profile }) => ({
+const mapStateToProps = ({ profile, photoDetails }) => ({
     photos: profile.photos,
+    comments: photoDetails.comments
 });
 
-const mapDispatchToProps = { attemptAWSLoadPhotoComments };
+const mapDispatchToProps = { attemptAWSLoadPhotoComments, clearPhotoDetails };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SinglePhoto);

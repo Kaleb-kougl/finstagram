@@ -19,7 +19,8 @@ import {
 import {
     attemptAWSLoadPhotoComments,
     successfulAWSLoadPhotoComments,
-    failedAWSLoadPhotoComments
+    failedAWSLoadPhotoComments,
+    clearPhotoDetails
 } from './photoDetailActions';
 
 export {
@@ -46,4 +47,5 @@ export {
     attemptAWSLoadPhotoComments,
     successfulAWSLoadPhotoComments,
     failedAWSLoadPhotoComments,
+    clearPhotoDetails,
 };

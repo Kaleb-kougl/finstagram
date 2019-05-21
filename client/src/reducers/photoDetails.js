@@ -1,7 +1,8 @@
 import {
     AWS_LOAD_COMMENTS_ATTEMPT,
     AWS_LOAD_COMMENTS_SUCCESSFUL,
-    AWS_LOAD_COMMENTS_FAILED
+    AWS_LOAD_COMMENTS_FAILED,
+    CLEAR_PHOTO_DETAILS
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -35,6 +36,12 @@ export default function (state = initialState, action) {
                 isLoading: false,
                 error: action.payload.error,
             };
+        case CLEAR_PHOTO_DETAILS:
+            return {
+                ...state,
+                comments: null,
+                photoId: null,
+            }
         default:
             return state;
     }

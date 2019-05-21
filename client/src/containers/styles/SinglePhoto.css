@@ -16,3 +16,19 @@
     margin: auto;
     padding-top: 10px;
 }
+
+.comment {
+    width: 70vw;
+    margin: auto;
+    text-align: left;
+}
+
+.comment-username {
+    font-weight: 600;
+    margin-right: 2vw;
+}
+
+.comments-container {
+    max-height: 45vh;
+    overflow: scroll;
+}
