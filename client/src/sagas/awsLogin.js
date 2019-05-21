@@ -8,7 +8,7 @@ const getPassword = ({ user }) => user.password;
 
 async function attemptLogin(email, password) {
     try {
-        const response = await Auth.signIn(email, password)
+        const response = await Auth.signIn(email, password);
         return { response };
     } catch (error) {
         return { error };
