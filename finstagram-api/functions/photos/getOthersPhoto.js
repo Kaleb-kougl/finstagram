@@ -7,7 +7,7 @@ export async function main(event, context) {
         TableName: "photos",
         Key: {
             userId: event.pathParameters.id_user,
-            photoId: event.pathParameters.id_photo
+            photoId: event.pathParameters.id
         }
     };
 

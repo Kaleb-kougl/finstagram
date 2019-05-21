@@ -5,6 +5,7 @@ import { Link } from '@reach/router';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { attemptAWSLoadPhotoComments } from '../actions';
 import './styles/SinglePhoto.css';
 
 library.add(faArrowLeft);
@@ -32,6 +33,10 @@ class SinglePhoto extends Component {
 
     componentDidMount() {
         this.grabSingularPhoto(this.props.photoId);
+        // This can make the request for the comments.
+        // dispatch action for photo comments
+        console.log(this.props.photoId)
+        this.props.attemptAWSLoadPhotoComments(this.props.photoId);
     }
 
     render() {
@@ -54,4 +59,6 @@ const mapStateToProps = ({ profile }) => ({
     photos: profile.photos,
 });
 
-export default connect(mapStateToProps, null)(SinglePhoto);
+const mapDispatchToProps = { attemptAWSLoadPhotoComments };
+
+export default connect(mapStateToProps, mapDispatchToProps)(SinglePhoto);

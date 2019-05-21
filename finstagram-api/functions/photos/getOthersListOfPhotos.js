@@ -6,7 +6,7 @@ export async function main(event, context) {
         TableName: "photos",
         KeyConditionExpression: "userId = :userId",
         ExpressionAttributeValues: {
-            ":userId": event.pathParameters.id_user
+            ":userId": event.pathParameters.id
         }
     };
 

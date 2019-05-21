@@ -1,6 +1,6 @@
 {
     "pathParameters": {
-        "id_photo": "26846f00-67ac-11e9-b1b7-7550ef0007d1",
+        "id": "26846f00-67ac-11e9-b1b7-7550ef0007d1",
         "id_user": "USER-SUB-1234"
     }
 }

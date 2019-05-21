@@ -16,6 +16,11 @@ import {
     successfulAWSConfirmSignup,
     failedAWSConfirmSignup,
 } from './signupActions';
+import {
+    attemptAWSLoadPhotoComments,
+    successfulAWSLoadPhotoComments,
+    failedAWSLoadPhotoComments
+} from './photoDetailActions';
 
 export {
     change_to_thumbnail,
@@ -37,5 +42,8 @@ export {
     failedAWSPostPhoto,
     attemptLoadProfile,
     successfulLoadProfile,
-    failedLoadProfile
+    failedLoadProfile,
+    attemptAWSLoadPhotoComments,
+    successfulAWSLoadPhotoComments,
+    failedAWSLoadPhotoComments,
 };

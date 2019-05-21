@@ -15,6 +15,7 @@ export async function main(event, context) {
         console.log(result);
         return success(result.Items);
     } catch (e) {
+        console.log(e);
         return failure({ status: false });
     }
 }

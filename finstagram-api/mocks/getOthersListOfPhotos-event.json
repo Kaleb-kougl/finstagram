@@ -1,5 +1,5 @@
 {
     "pathParameters": {
-        "id_user": "USER-SUB-1234"
+        "id": "USER-SUB-1234"
     }
 }
