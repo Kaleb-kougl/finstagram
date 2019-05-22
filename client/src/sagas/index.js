@@ -5,6 +5,7 @@ import signupWatcher from './awsSignup';
 import postPhotoWatcher from './awsPostPhoto';
 import loadUserPhotosWatcher from './awsGetUserPhotos';
 import loadPhotoCommentsWatcher from './awsGetComments';
+import postCommentWatcher from './awsPostComment';
 
 export default function* rootSaga() {
     yield all([
@@ -14,5 +15,6 @@ export default function* rootSaga() {
         postPhotoWatcher(),
         loadUserPhotosWatcher(),
         loadPhotoCommentsWatcher(),
+        postCommentWatcher(),
     ]);
 };

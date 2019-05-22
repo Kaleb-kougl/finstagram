@@ -5,7 +5,7 @@ import { Link } from '@reach/router';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faCommentAlt } from '@fortawesome/free-solid-svg-icons';
-import { attemptAWSLoadPhotoComments, clearPhotoDetails } from '../actions';
+import { attemptAWSLoadPhotoComments, clearPhotoDetails, attemptPostComment } from '../actions';
 import './styles/SinglePhoto.css';
 
 library.add(faArrowLeft, faCommentAlt);
@@ -23,14 +23,28 @@ class SinglePhoto extends Component {
         }
     }
 
-    componentDidMount() {
-        this.grabSingularPhoto(this.props.photoId);
+    loadComments = () => {
+
         this.props.attemptAWSLoadPhotoComments(this.props.photoId);
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidMount() {
+        this.grabSingularPhoto(this.props.photoId);
+        // this.props.attemptAWSLoadPhotoComments(this.props.photoId);
+        this.loadComments();
+    }
+
+    componentDidUpdate = (prevProps, prevState) => {
         if (prevProps.comments === null && this.props.comments !== null) {
             this.setState({ comments: this.props.comments });
+        }
+
+        if (!prevProps.error && this.props.error) {
+            alert(this.props.error.message);
+        } else if (!prevProps.isSuccess && this.props.isSuccess) {
+            this.setState({ newComment: '', commentFormVisible: false });
+            alert('Your comment has been posted!');
+            this.loadComments();
         }
     }
 
@@ -62,6 +76,11 @@ class SinglePhoto extends Component {
         }
     }
 
+    handleSubmit = event => {
+        event.preventDefault();
+        this.props.attemptPostComment(this.state.newComment);
+    }
+
     renderComments = () => {
         const comments = this.state.comments.map((comment, i) =>
             <p key={i} className="comment">
@@ -76,7 +95,7 @@ class SinglePhoto extends Component {
 
     renderCommentForm = () => {
         return (
-            <Form className="comment-form">
+            <Form className="comment-form" onSubmit={this.handleSubmit}>
                 <Form.Group controlId="newComment">
                     <Form.Label>Write your comment here!</Form.Label>
                     <Form.Control
@@ -125,11 +144,13 @@ class SinglePhoto extends Component {
     }
 }
 
-const mapStateToProps = ({ profile, photoDetails }) => ({
+const mapStateToProps = ({ profile, photoDetails, postComment }) => ({
     photos: profile.photos,
-    comments: photoDetails.comments
+    comments: photoDetails.comments,
+    isSuccess: postComment.isSuccess,
+    error: postComment.error,
 });
 
-const mapDispatchToProps = { attemptAWSLoadPhotoComments, clearPhotoDetails };
+const mapDispatchToProps = { attemptAWSLoadPhotoComments, clearPhotoDetails, attemptPostComment };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SinglePhoto);

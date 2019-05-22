@@ -20,8 +20,13 @@ import {
     attemptAWSLoadPhotoComments,
     successfulAWSLoadPhotoComments,
     failedAWSLoadPhotoComments,
-    clearPhotoDetails
+    clearPhotoDetails,
 } from './photoDetailActions';
+import {
+    attemptPostComment,
+    successfulPostComment,
+    failedPostComment,
+} from './postCommentActions';
 
 export {
     change_to_thumbnail,
@@ -48,4 +53,7 @@ export {
     successfulAWSLoadPhotoComments,
     failedAWSLoadPhotoComments,
     clearPhotoDetails,
+    attemptPostComment,
+    successfulPostComment,
+    failedPostComment,
 };
