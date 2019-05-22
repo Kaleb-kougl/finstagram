@@ -84,7 +84,11 @@ class SinglePhoto extends Component {
                         rows="3"
                         value={this.state.newComment}
                         onChange={this.handleChange}
+                        isInvalid={this.state.newComment.length > 120}
                     />
+                    <Form.Control.Feedback type="invalid">
+                        Please limit your comment size to less than 120 characters.
+                    </Form.Control.Feedback>
                 </Form.Group>
                 <Button
                     disabled={!this.validateComment()}
